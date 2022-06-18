@@ -221,7 +221,7 @@ public class Main {
             Node f = head;
             Node s = head;
 
-            while (f.next != null && f.next.next != null) {
+            while (f != tail && f.next != tail) {
                 f = f.next.next;
                 s = s.next;
             }
