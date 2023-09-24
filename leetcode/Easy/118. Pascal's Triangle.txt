@@ -1,0 +1,29 @@
+Q->https://leetcode.com/problems/pascals-triangle/
+
+class Solution {
+    public List<List<Integer>> generate(int n) {
+        List<List<Integer>> list = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            List<Integer> l = new ArrayList<Integer>();
+            for(int j=1;j<=i;j++)
+            {
+                if(j==1 || j==i)
+                    l.add(1);
+                else
+                {
+                    List<Integer> tmp=list.get(i-2);
+                    while(j<i)
+                    {
+                        int x=tmp.get(j-2)+tmp.get(j-1);
+                        l.add(x);
+                        j++;
+                    }
+                    j--;
+                }
+            }
+            list.add(l);
+        }
+        return list;
+    }
+}

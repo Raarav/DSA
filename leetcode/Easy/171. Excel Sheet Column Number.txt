@@ -1,0 +1,18 @@
+Q->https://leetcode.com/problems/excel-sheet-column-number/
+
+class Solution {
+    private int getCharValue(char ch){
+        return (ch - 'A') + 1;
+    }
+    public int titleToNumber(String columnTitle) {
+        int result = 0;
+        int size = columnTitle.length()-1;
+        for(int i=0;i<=size;i++){
+            char ch = columnTitle.charAt(size-i);
+            result += (int)Math.pow(26,i) * getCharValue(ch);
+            // System.out.println(ch + ":- "+ result + "i");
+        }
+        // System.out.println((int)Math.pow(26,2));
+        return result;
+    }
+}

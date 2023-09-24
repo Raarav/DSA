@@ -1,0 +1,27 @@
+Q->https://leetcode.com/problems/all-paths-from-source-to-target/
+
+class Solution {
+    public void generatePaths(int[][] graph, List<Integer> path, List<List<Integer>> result, int i){  
+        
+        if(i == graph.length-1){
+            result.add(new ArrayList<>(path));
+            return;
+        }else{       
+             
+            int[] arr = graph[i];
+            for(int val: arr){
+                path.add(val); 
+                generatePaths(graph, path, result, val);  
+                path.remove(path.size()-1);
+            }            
+        }    
+        
+    }
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        path.add(0);
+        generatePaths(graph, path, result, 0);
+        return result;
+    }
+}

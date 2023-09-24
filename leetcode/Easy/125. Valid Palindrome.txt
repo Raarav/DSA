@@ -1,0 +1,38 @@
+Q->https://leetcode.com/problems/valid-palindrome/
+
+class Solution {
+    private char convertUpperLower(int val){
+        return (char)(val - 'A' + 'a');
+    }
+    private boolean charValid(int val){        
+        return (val >= 65 && val <= 90) || (val >= 97 && val <= 122) || (val >= 48 && val <= 57)? true : false;     
+    }
+    public boolean isPalindrome(String s) {
+        // A:65, Z:90 -- a:97, z:122
+        boolean result = true;
+        if(s.length() == 0 || s.length() == 1) return result;
+        
+        String dummy = "";
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            int val = (int)ch;
+            if(charValid(val)){                
+                dummy +=  val >= 65 && val <= 90 ? convertUpperLower(val) : ch;
+            }
+        }
+        // System.out.println(dummy);
+        int start = 0;
+        int end = dummy.length()-1;
+        // System.out.println(start + "--" + end);
+        while(start <= end){
+            if(dummy.charAt(start) != dummy.charAt(end)){
+                result=false;      
+                break;
+            }
+            // System.out.println(dummy.charAt(start) + "!=" + dummy.charAt(end));
+            start++;
+            end--;
+        }
+        return result;
+    }
+}

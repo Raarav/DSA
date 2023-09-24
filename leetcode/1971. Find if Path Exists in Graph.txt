@@ -1,0 +1,46 @@
+Q->https://leetcode.com/problems/find-if-path-exists-in-graph/
+
+class Solution {
+    private ArrayList<Integer>[] adjancyList;
+    boolean[] visited;
+    
+    private void constructAdjancyList(int n, int[][] edges){
+        for(int i=0;i<n;i++){
+            adjancyList[i] = new ArrayList<Integer>();
+        }
+        for(int[] pair : edges){
+            int u = pair[0];
+            int v = pair[1];
+            adjancyList[u].add(v);
+            adjancyList[v].add(u);            
+        }
+    }
+    public boolean isValidPath(int s,int d){        
+        if(s == d){
+            return true;
+        }else{
+            boolean result = false;
+            visited[s] = true;
+            ArrayList<Integer> nbrs = adjancyList[s];
+            for(int nbr : nbrs){
+                if(!visited[nbr]){
+                    result = isValidPath(nbr, d);
+                }    
+                if(result){
+                    break;
+                }
+            } 
+            return result;
+        }  
+    }
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        boolean result = false;
+        adjancyList = new ArrayList[n];
+        visited = new boolean[n];
+        constructAdjancyList(n, edges);   
+        for(ArrayList<Integer> al : adjancyList){
+            System.out.println(al);
+        }
+        return isValidPath(source, destination);
+    }
+}
